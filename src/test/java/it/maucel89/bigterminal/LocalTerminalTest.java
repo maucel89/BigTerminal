@@ -5,11 +5,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
+import org.testfx.framework.junit.ApplicationTest;
+
+import java.io.IOException;
 
 /**
  * @author Mauro Celani
  */
-public class LocalTerminalTest {
+public class LocalTerminalTest extends ApplicationTest {
 
 	@Override
 	public void start (Stage stage) throws Exception {
@@ -22,9 +27,18 @@ public class LocalTerminalTest {
 	@Test
 	public void testLocalTerminal() {
 
+		try {
+			LocalTerminal localTerminal = new LocalTerminal();
 
+		}
+		catch (IOException e) {
 
-		LocalTerminal localTerminal = new LocalTerminal();
+		}
+
 	}
+
+
+	private static final Logger _log = LoggerFactory.getLogger(
+		LocalTerminalTest.class);
 
 }

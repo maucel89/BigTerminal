@@ -1,18 +1,30 @@
 apply plugin: 'java'
+apply plugin: 'application'
 
 targetCompatibility = "1.8"
 sourceCompatibility = "1.8"
 
+applicationName = applicationName.toLowerCase()
+archivesBaseName = applicationName
+version = "0.1"
+mainClassName = "it.maucel89.bigterminal.Main"
+
+jar {
+	baseName = 'bigterminal'
+	version = "$version"
+}
+
 repositories {
+	mavenLocal()
+	mavenCentral()
 	maven {
-		mavenLocal()
-		mavenCentral()
 		url  "https://jetbrains.bintray.com/pty4j"
 	}
 }
 
 dependencies {
-	// https://github.com/JetBrains/pty4j
+	compile group: 'com.liferay', name: 'com.liferay.petra.string', version: '3.0.0'
+	compile group: 'com.jcraft', name: 'jsch', version: '0.1.55'
 	compile group: 'org.jetbrains.pty4j', name: 'pty4j', version: '0.9.3'
 
 	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
