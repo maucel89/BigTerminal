@@ -1,0 +1,20 @@
+apply plugin: 'java'
+
+targetCompatibility = "1.8"
+sourceCompatibility = "1.8"
+
+repositories {
+	maven {
+		mavenLocal()
+		mavenCentral()
+		url  "https://jetbrains.bintray.com/pty4j"
+	}
+}
+
+dependencies {
+	// https://github.com/JetBrains/pty4j
+	compile group: 'org.jetbrains.pty4j', name: 'pty4j', version: '0.9.3'
+
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+	testCompile group: 'org.testfx', name: 'testfx-junit', version: '4.0.15-alpha'
+}
