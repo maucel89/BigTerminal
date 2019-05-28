@@ -1,5 +1,6 @@
 package it.maucel89.bigterminal;
 
+import it.maucel89.bigterminal.terminal.LocalTerminal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +19,7 @@ public class LocalTerminalTest extends ApplicationTest {
 
 	@Override
 	public void start (Stage stage) throws Exception {
-		Parent mainNode = FXMLLoader.load(Main.class.getResource("sample.fxml"));
+		Parent mainNode = FXMLLoader.load(BigTerminal.class.getResource("sample.fxml"));
 		stage.setScene(new Scene(mainNode));
 		stage.show();
 		stage.toFront();
