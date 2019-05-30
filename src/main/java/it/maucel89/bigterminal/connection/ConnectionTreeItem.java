@@ -23,10 +23,10 @@ public class ConnectionTreeItem {
 		rootConnectionTreeItem.setFolder(true);
 		rootConnectionTreeItem.setText("Connessioni");
 
-		GlyphView icon = new GlyphView();
-		icon.setF
+		//GlyphView icon = new GlyphView();
+		//icon.setF
 
-		root.setGraphic();
+		//root.setGraphic();
 		root.setValue(rootConnectionTreeItem);
 
 		return root;

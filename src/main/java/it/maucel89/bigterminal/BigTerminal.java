@@ -1,6 +1,7 @@
 package it.maucel89.bigterminal;
 
 import com.liferay.petra.string.StringPool;
+import it.maucel89.bigterminal.lateral.LateralTabPane;
 import it.maucel89.bigterminal.terminal.Terminal;
 import it.maucel89.bigterminal.terminal.TerminalTab;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
@@ -31,13 +33,14 @@ public class BigTerminal extends Application {
 
         _initSpring();
 
-        // https://stackoverflow.com/questions/16924533/how-to-set-tabs-position-in-javafx
-        Pane pane1 = new Pane();
+        Font.loadFont(BigTerminal.class.getResource("/fonts/fa-brands-400.ttf")
+            .toExternalForm(), 12);
 
+        TabPane lateralTabPane = new LateralTabPane();
         TabPane connectionTabPane = _createConnectionTabPane();
 
         SplitPane splitPane = new SplitPane();
-        splitPane.getItems().addAll(pane1, connectionTabPane);
+        splitPane.getItems().addAll(lateralTabPane, connectionTabPane);
         splitPane.setDividerPositions(0.2);
 
         BorderPane borderPane = new BorderPane();
