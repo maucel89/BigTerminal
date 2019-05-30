@@ -2,12 +2,12 @@ package it.maucel89.bigterminal;
 
 import com.liferay.petra.string.StringPool;
 import it.maucel89.bigterminal.lateral.LateralTabPane;
-import it.maucel89.bigterminal.terminal.Terminal;
+import it.maucel89.bigterminal.lateral.connection.ConnectionTree;
 import it.maucel89.bigterminal.terminal.TerminalTab;
+import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
@@ -33,19 +33,14 @@ public class BigTerminal extends Application {
 
         _initSpring();
 
-        Font.loadFont(BigTerminal.class.getResource("/fonts/fa-brands-400.ttf")
+        Font.loadFont(BigTerminal.class.getResource("fonts/fa-brands-400.ttf")
             .toExternalForm(), 12);
 
-        TabPane lateralTabPane = new LateralTabPane();
         TabPane connectionTabPane = _createConnectionTabPane();
-
-        SplitPane splitPane = new SplitPane();
-        splitPane.getItems().addAll(lateralTabPane, connectionTabPane);
-        splitPane.setDividerPositions(0.2);
 
         BorderPane borderPane = new BorderPane();
         //borderPane.setTop(topBox);
-        borderPane.setCenter(splitPane);
+        borderPane.setCenter(connectionTabPane);
 
         Scene scene = new Scene(
             borderPane, 900d, 700d, Color.WHITE);
@@ -70,11 +65,10 @@ public class BigTerminal extends Application {
     }
 
     private TabPane _createConnectionTabPane() {
+
         _connectionTabPane = new TabPane();
 
-        Tab homeTab = new Tab();
-        homeTab.setClosable(false);
-        homeTab.setText("Home");
+        Tab homeTab = _initHomeTab();
 
         Tab addConnectionTab = new Tab();
         addConnectionTab.setClosable(false);
@@ -103,6 +97,21 @@ public class BigTerminal extends Application {
             });
 
         return _connectionTabPane;
+    }
+
+    private Tab _initHomeTab() {
+
+        Tab homeTab = new Tab();
+        homeTab.setClosable(false);
+        homeTab.setText("Home");
+
+        Pane homePane = new Pane();
+
+        homeTab.setContent(
+            SplitPaneUtils.getSplitPane(
+                new ConnectionTree(), homePane));
+
+        return homeTab;
     }
 
     private void _initSpring() {

@@ -1,6 +1,8 @@
 package it.maucel89.bigterminal.terminal;
 
+import it.maucel89.bigterminal.lateral.filesystem.FSTree;
 import it.maucel89.bigterminal.util.KeyCodeUtils;
+import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.event.Event;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
@@ -58,7 +60,9 @@ public class TerminalTab extends Tab {
 
 		_textArea.setFont(_font);
 
-		setContent(_textArea);
+		setContent(
+			SplitPaneUtils.getSplitPane(
+				new FSTree(), _textArea));
 	}
 
 	public void _setOutputStream(OutputStream outputStream) {

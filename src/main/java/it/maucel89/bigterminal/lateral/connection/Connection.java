@@ -1,4 +1,4 @@
-package it.maucel89.bigterminal.connection;
+package it.maucel89.bigterminal.lateral.connection;
 
 /**
  * @author Mauro Celani
