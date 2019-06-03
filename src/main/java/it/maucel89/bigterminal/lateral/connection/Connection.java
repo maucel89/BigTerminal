@@ -1,16 +1,30 @@
 package it.maucel89.bigterminal.lateral.connection;
 
+import it.maucel89.bigterminal.lateral.tree.BaseValue;
+import lombok.Data;
+import org.jetbrains.annotations.NotNull;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * @author Mauro Celani
  */
-public class Connection {
+@Data
+public class Connection extends BaseValue implements Comparable<Connection> {
 
-	private String _host;
-	private String _user;
-	private String _pass;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	private String host;
+	private String user;
+	private String pass;
 
 	@Override
-	public String toString() {
-		return "pippo";
+	public int compareTo(@NotNull Connection connection) {
+		return 0;
 	}
+
 }

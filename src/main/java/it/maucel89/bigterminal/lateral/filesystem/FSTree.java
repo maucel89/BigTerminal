@@ -8,7 +8,7 @@ import it.maucel89.bigterminal.lateral.tree.BaseTree;
 public class FSTree extends BaseTree<FSItem> {
 
 	public FSTree() {
-		super(new FSTreeItem().getRootItem("/"));
+		super(new FSTreeItem().getRootItem("root"));
 	}
 
 }

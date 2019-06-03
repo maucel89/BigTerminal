@@ -33,9 +33,6 @@ public class BigTerminal extends Application {
 
         _initSpring();
 
-        Font.loadFont(BigTerminal.class.getResource("fonts/fa-brands-400.ttf")
-            .toExternalForm(), 12);
-
         TabPane connectionTabPane = _createConnectionTabPane();
 
         BorderPane borderPane = new BorderPane();

@@ -1,25 +1,26 @@
 package it.maucel89.bigterminal.lateral.tree;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.scene.control.TreeItem;
 
 /**
  * @author Mauro Celani
  */
-public abstract class BaseTreeItem<ValueType> extends TreeItem<ValueType> {
+public abstract class BaseTreeItem<ValueType extends BaseValue>
+	extends TreeItem<ValueType> {
 
 	public TreeItem<ValueType> getRootItem(String label) {
 
 		ValueType rootConnectionTreeItem = createRootValueItem();
+		rootConnectionTreeItem.setText(label);
 
 		setFolder(true);
-		setText(label);
 
 		setValue(rootConnectionTreeItem);
 
-		//GlyphView icon = new GlyphView();
-		//icon.setF
-
-		//root.setGraphic();
+		setGraphic(GlyphsDude.createIcon(
+			FontAwesomeIcon.FOLDER, "17px"));
 
 		return this;
 	}
@@ -30,17 +31,7 @@ public abstract class BaseTreeItem<ValueType> extends TreeItem<ValueType> {
 		_folder = folder;
 	}
 
-	public void setText(String text) {
-		_text = text;
-	}
-
-	@Override
-	public String toString() {
-		return _text;
-	}
-
 	private boolean _folder;
 	private ValueType _value;
-	private String _text;
 
 }
