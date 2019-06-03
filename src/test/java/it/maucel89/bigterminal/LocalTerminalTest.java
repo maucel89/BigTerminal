@@ -1,6 +1,5 @@
 package it.maucel89.bigterminal;
 
-import it.maucel89.bigterminal.terminal.LocalTerminal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

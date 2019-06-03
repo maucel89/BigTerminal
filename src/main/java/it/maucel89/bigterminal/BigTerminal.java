@@ -1,25 +1,21 @@
 package it.maucel89.bigterminal;
 
+import com.kodedu.terminalfx.TerminalTab;
 import com.liferay.petra.string.StringPool;
-import it.maucel89.bigterminal.lateral.LateralTabPane;
 import it.maucel89.bigterminal.lateral.connection.ConnectionTree;
-import it.maucel89.bigterminal.terminal.TerminalTab;
+import it.maucel89.bigterminal.terminal.TerminalTabBuilder;
 import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
 
 public class BigTerminal extends Application {
 
@@ -56,7 +52,7 @@ public class BigTerminal extends Application {
 
         _connectionTabPane.getTabs().forEach(tab -> {
             if (tab instanceof TerminalTab) {
-               ((TerminalTab)tab).close();
+               ((TerminalTab)tab).destroy();
             }
         });
     }
@@ -82,14 +78,11 @@ public class BigTerminal extends Application {
             .selectedItemProperty()
             .addListener((observable, oldTab, newTab) -> {
                 if (newTab == addConnectionTab) {
-                    try {
-                        TerminalTab terminalTab = new TerminalTab();
-                        tabs.add(tabs.size() - 1, terminalTab);
-                        selectionModel.select(terminalTab);
-                    }
-                    catch (IOException e) {
-                        _log.error(e, e);
-                    }
+                    Tab terminalTab =
+                        TerminalTabBuilder.createLocalTerminalTab();
+
+                    tabs.add(tabs.size() - 1, terminalTab);
+                    selectionModel.select(terminalTab);
                 }
             });
 
