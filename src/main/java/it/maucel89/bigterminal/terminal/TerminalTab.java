@@ -1,10 +1,11 @@
 package it.maucel89.bigterminal.terminal;
 
-import com.kodedu.terminalfx.config.TerminalConfig;
+import com.kodedu.terminalfx.TerminalBuilder;
 import it.maucel89.bigterminal.lateral.filesystem.FSTree;
 import it.maucel89.bigterminal.util.KeyCodeUtils;
 import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
@@ -14,7 +15,6 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.nio.file.Paths;
 
 /**
  * @author Mauro Celani
@@ -62,12 +62,16 @@ public class TerminalTab extends Tab {
 
 		_textArea.setFont(_font);
 
-		com.kodedu.terminalfx.Terminal term =
-			new com.kodedu.terminalfx.Terminal(new TerminalConfig(), Paths.get(System.getProperty("user.home")));
+		TerminalBuilder terminalBuilder = new TerminalBuilder();
+
+		Node terminal = terminalBuilder.newTerminal().getContent();
+
+		//new com.kodedu.terminalfx.Terminal(
+		//	new TerminalConfig(), Paths.get(System.getProperty("user.home")));
 
 		setContent(
 			SplitPaneUtils.getSplitPane(
-				new FSTree(), term));
+				new FSTree(), terminal));
 	}
 
 	public void _setOutputStream(OutputStream outputStream) {
