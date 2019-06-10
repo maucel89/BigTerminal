@@ -2,9 +2,11 @@ package it.maucel89.bigterminal.terminal;
 
 import com.kodedu.terminalfx.TerminalBuilder;
 import com.kodedu.terminalfx.TerminalTab;
+import com.kodedu.terminalfx.config.TerminalConfig;
 import it.maucel89.bigterminal.lateral.filesystem.FSTree;
 import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.scene.control.Tab;
+import javafx.scene.paint.Color;
 
 /**
  * @author Mauro Celani
@@ -26,7 +28,13 @@ public class TerminalTabBuilder {
 
 	private static TerminalBuilder _getTerminalBuilder() {
 		if (_terminalBuilder == null) {
-			_terminalBuilder = new TerminalBuilder();
+
+			TerminalConfig darkConfig = new TerminalConfig();
+			darkConfig.setBackgroundColor(Color.rgb(16, 16, 16));
+			darkConfig.setForegroundColor(Color.rgb(240, 240, 240));
+			darkConfig.setCursorColor(Color.rgb(255, 0, 0, 0.5));
+
+			_terminalBuilder = new TerminalBuilder(darkConfig);
 		}
 		return _terminalBuilder;
 	}
