@@ -2,6 +2,8 @@ package it.maucel89.bigterminal;
 
 import com.kodedu.terminalfx.TerminalTab;
 import com.liferay.petra.string.StringPool;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import it.maucel89.bigterminal.lateral.connection.ConnectionTree;
 import it.maucel89.bigterminal.terminal.TerminalTabBuilder;
 import it.maucel89.bigterminal.util.SplitPaneUtils;
@@ -65,7 +67,8 @@ public class BigTerminal extends Application {
 
         Tab addConnectionTab = new Tab();
         addConnectionTab.setClosable(false);
-        addConnectionTab.setText(StringPool.PLUS);
+        addConnectionTab.setGraphic(GlyphsDude.createIcon(
+            FontAwesomeIcon.PLUS, "15px"));
 
         ObservableList<Tab> tabs = _connectionTabPane.getTabs();
 
@@ -93,7 +96,8 @@ public class BigTerminal extends Application {
 
         Tab homeTab = new Tab();
         homeTab.setClosable(false);
-        homeTab.setText("Home");
+        homeTab.setGraphic(GlyphsDude.createIcon(
+            FontAwesomeIcon.HOME, "15px"));
 
         Pane homePane = new Pane();
 
