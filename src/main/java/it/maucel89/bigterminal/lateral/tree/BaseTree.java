@@ -12,4 +12,6 @@ public class BaseTree<ValueType> extends TreeView<ValueType> {
 		super(rootTreeItem);
 	}
 
+	public static final long DEFAULT_ROOT_ITEM_ID = 0;
+
 }

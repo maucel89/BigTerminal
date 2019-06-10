@@ -5,6 +5,7 @@ import com.liferay.petra.string.StringPool;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import it.maucel89.bigterminal.lateral.connection.ConnectionTree;
+import it.maucel89.bigterminal.lateral.connection.storage.ConnectionDao;
 import it.maucel89.bigterminal.terminal.TerminalTabBuilder;
 import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.application.Application;
@@ -18,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class BigTerminal extends Application {
 
@@ -57,6 +59,8 @@ public class BigTerminal extends Application {
                ((TerminalTab)tab).destroy();
             }
         });
+
+        _context.stop();
     }
 
     private TabPane _createConnectionTabPane() {
@@ -103,17 +107,23 @@ public class BigTerminal extends Application {
 
         homeTab.setContent(
             SplitPaneUtils.getSplitPane(
-                new ConnectionTree(), homePane));
+                new ConnectionTree(_connectionDao), homePane));
 
         return homeTab;
     }
 
     private void _initSpring() {
 
+        _context = new AnnotationConfigApplicationContext(BigTerminal.class);
+
+        _connectionDao = _context.getBean(ConnectionDao.class);
     }
 
     private Stage _primaryStage;
     private TabPane _connectionTabPane;
+
+    private AnnotationConfigApplicationContext _context;
+    private ConnectionDao _connectionDao;
 
     public static void main(String[] args) {
         launch(args);

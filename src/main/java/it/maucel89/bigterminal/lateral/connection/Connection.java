@@ -18,6 +18,8 @@ public class Connection extends BaseValue implements Comparable<Connection> {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	private long parentId;
+
 	private String host;
 	private String user;
 	private String pass;

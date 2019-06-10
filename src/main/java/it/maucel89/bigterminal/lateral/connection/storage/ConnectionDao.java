@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author Mauro Celani
@@ -13,12 +13,13 @@ import java.util.List;
 public interface ConnectionDao extends CrudRepository<Connection, Long> {
 
 	@Query("select c from Connection c where c.host = :name")
-	public Connection getHostByName(@Param("name") String name);
+	public Connection getConnectionByName(@Param("name") String name);
 
 	@Query("select c from Connection c")
-	public List<Connection> getAll();
+	public Collection<Connection> getAll();
 
-	@Query("select c.host from Connection c")
-	public List<String> getHost();
+	@Query("select c from Connection c where parentId = :parentId")
+	public Collection<Connection> getConnectionsByParentId(
+		@Param("parentId") long parentId);
 
 }
