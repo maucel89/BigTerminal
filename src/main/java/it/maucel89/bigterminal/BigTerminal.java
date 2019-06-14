@@ -5,7 +5,7 @@ import com.liferay.petra.string.StringPool;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import it.maucel89.bigterminal.lateral.connection.ConnectionTree;
-import it.maucel89.bigterminal.lateral.connection.storage.ConnectionDao;
+import it.maucel89.bigterminal.lateral.connection.storage.ConnectionRepository;
 import it.maucel89.bigterminal.terminal.TerminalTabBuilder;
 import it.maucel89.bigterminal.util.SplitPaneUtils;
 import javafx.application.Application;
@@ -19,8 +19,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@SpringBootApplication
+@EnableJpaRepositories(basePackageClasses = { ConnectionRepository.class })
 public class BigTerminal extends Application {
 
     @Override
@@ -28,10 +33,10 @@ public class BigTerminal extends Application {
 
         _log.debug("Start BigTerminal");
 
+        _initSpring();
+
         _primaryStage = primaryStage;
         _primaryStage.setTitle("BigTerminal");
-
-        _initSpring();
 
         TabPane connectionTabPane = _createConnectionTabPane();
 
@@ -50,6 +55,10 @@ public class BigTerminal extends Application {
         _primaryStage.show();
     }
 
+    private void _initSpring() {
+        _springContext = SpringApplication.run(BigTerminal.class);
+    }
+
     @Override
     public void stop() throws Exception {
         _log.debug("Stop BigTerminal");
@@ -60,7 +69,7 @@ public class BigTerminal extends Application {
             }
         });
 
-        _context.stop();
+        _springContext.stop();
     }
 
     private TabPane _createConnectionTabPane() {
@@ -107,23 +116,15 @@ public class BigTerminal extends Application {
 
         homeTab.setContent(
             SplitPaneUtils.getSplitPane(
-                new ConnectionTree(_connectionDao), homePane));
+                new ConnectionTree(), homePane));
 
         return homeTab;
-    }
-
-    private void _initSpring() {
-
-        _context = new AnnotationConfigApplicationContext(BigTerminal.class);
-
-        _connectionDao = _context.getBean(ConnectionDao.class);
     }
 
     private Stage _primaryStage;
     private TabPane _connectionTabPane;
 
-    private AnnotationConfigApplicationContext _context;
-    private ConnectionDao _connectionDao;
+    private ConfigurableApplicationContext _springContext;
 
     public static void main(String[] args) {
         launch(args);

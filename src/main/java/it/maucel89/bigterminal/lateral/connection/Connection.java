@@ -4,14 +4,18 @@ import it.maucel89.bigterminal.lateral.tree.BaseValue;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Mauro Celani
  */
 @Data
+@Entity
+@Table(name="connections")
 public class Connection extends BaseValue implements Comparable<Connection> {
 
 	@Id
