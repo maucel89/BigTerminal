@@ -2,11 +2,11 @@ package it.maucel89.bigterminal.lateral.connection.storage;
 
 import it.maucel89.bigterminal.lateral.connection.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-@Repository
+@Service
 public class ConnectionServiceImpl implements ConnectionService {
 
 	@Override
